@@ -1,0 +1,56 @@
+﻿<Window x:Class="Browser.View.IMainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Browser.Helper"
+         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+         xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        
+        mc:Ignorable="d"
+   Title="WebBrowserHelperDemo" Height="800" Width="800"
+        >
+
+
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="769"/>
+        </Grid.RowDefinitions>
+
+        <WebBrowser
+                local:WebBrowserHelper.Url="{Binding Url}" Margin="51,11,105,485" RenderTransformOrigin="0.5,0.5"
+             >
+            <WebBrowser.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.385"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="1.493"/>
+                </TransformGroup>
+            </WebBrowser.RenderTransform>
+        </WebBrowser>
+
+        <Button
+            Command="{Binding UrlCommand}"
+            VerticalAlignment="Center" Height="30"
+            Content="Anasayfa" Margin="55,295,637,444" RenderTransformOrigin="-2,-1.9" />
+        <Button Content="Veri Çek" Command="{Binding VeriGetirCommand}" HorizontalAlignment="Left" Margin="187,295,0,0" VerticalAlignment="Top" Width="75" Height="30" RenderTransformOrigin="0.107,0.1"/>
+        <ListView  ItemsSource="{Binding PageList}" SelectedItem="{Binding SelectItem,Mode=TwoWay}" HorizontalAlignment="Left" Height="190" Margin="55,349,0,0" VerticalAlignment="Top" Width="458">
+            <i:EventTrigger EventName="MouseDoubleClick">
+                <ei:CallMethodAction MethodName="DoubleClickMethod" TargetObject="{Binding}"/>
+            </i:EventTrigger>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Başlık" Width="300" DisplayMemberBinding="{Binding Baslik}"/>
+                    <GridViewColumn Header="Tarih" Width="150" DisplayMemberBinding="{Binding Tarih}"/>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+    </Grid>
+
+
+</Window>
